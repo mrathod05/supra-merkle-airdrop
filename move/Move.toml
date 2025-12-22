@@ -1,0 +1,17 @@
+[package]
+name = "MerkleAirdrop"
+version = "1.0.0"
+authors = ["mrathod05 <mrathod05@github>"]
+
+[addresses]
+merkle_airdrop = "0x849dad064d2dac8af30e52986808befa26a6c3a6d5beac1d9548a7dd02a04660"
+
+
+[dev-addresses]
+
+[dependencies.SupraFramework]
+git = "https://github.com/Entropy-Foundation/aptos-core.git"
+rev = "dev"
+subdir = "aptos-move/framework/supra-framework"
+
+[dev-dependencies]

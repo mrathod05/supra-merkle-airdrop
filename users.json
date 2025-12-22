@@ -1,0 +1,20 @@
+{
+  "users": [
+    {
+      "address": "0x73d820fdc9febcbdb9824ce83d5939e6b4dd6cc251e8714a7da6eac64f2468bf",
+      "amount": 100
+    },
+    {
+      "address": "0x05725e2fd119370a9da4b3afab923f9c35f454c810e175177f06a352de8a26d8",
+      "amount": 200
+    },
+    {
+      "address": "0x4d2672eca0dcf730350502b9c5f0742cbee0ff10fd69b6c9414407bf15d4b7d1",
+      "amount": 300
+    },
+    {
+      "address": "0x60db2945ec2e70071427892e671bcb1a242c2e7927d420abdfce4c854d01c6c8",
+      "amount": 400
+    }
+  ]
+}

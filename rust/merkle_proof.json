@@ -1,0 +1,50 @@
+[
+  {
+    "address": "0x73d820fdc9febcbdb9824ce83d5939e6b4dd6cc251e8714a7da6eac64f2468bf",
+    "amount": 100,
+    "positions": [
+      false,
+      false
+    ],
+    "proof": [
+      "cc10104ee474aa5404ccb29c1bead029902d3b4531218e6a75cbccea2a3b4d09",
+      "f303763939c42f9e5bb84e2c001e77ca974892c98dae3e24325ca3a2ece1c388"
+    ]
+  },
+  {
+    "address": "0x05725e2fd119370a9da4b3afab923f9c35f454c810e175177f06a352de8a26d8",
+    "amount": 200,
+    "positions": [
+      true,
+      false
+    ],
+    "proof": [
+      "556624a4251c88a6592bdef4322ca32ff0f7b52714fb39b01fced73e86d2f978",
+      "f303763939c42f9e5bb84e2c001e77ca974892c98dae3e24325ca3a2ece1c388"
+    ]
+  },
+  {
+    "address": "0x4d2672eca0dcf730350502b9c5f0742cbee0ff10fd69b6c9414407bf15d4b7d1",
+    "amount": 300,
+    "positions": [
+      false,
+      true
+    ],
+    "proof": [
+      "a119e868b3f25fe1200cd476e2f9381a71eb84d6a68e9dc65fd7483d6903973d",
+      "3b3ff6eb0df439863e30673f8909e9e5e281cf4fff75530015f5b838a4b0bc38"
+    ]
+  },
+  {
+    "address": "0x60db2945ec2e70071427892e671bcb1a242c2e7927d420abdfce4c854d01c6c8",
+    "amount": 400,
+    "positions": [
+      true,
+      true
+    ],
+    "proof": [
+      "6e626c86d649337f7130447615c9c698d45916287e1dc22503eb7009148804aa",
+      "3b3ff6eb0df439863e30673f8909e9e5e281cf4fff75530015f5b838a4b0bc38"
+    ]
+  }
+]

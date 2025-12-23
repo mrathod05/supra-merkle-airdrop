@@ -5,7 +5,7 @@ module merkle_airdrop::airdrop_tests {
     use std::hash;
     use merkle_airdrop::airdrop;
 
-    /// Helper function to compute leaf hash (same as contract logic)
+    // Helper function to compute leaf hash (same as contract logic)
     fun compute_leaf_test(addr: address, amount: u64): vector<u8> {
         let bytes = vector::empty<u8>();
         vector::append(&mut bytes, bcs::to_bytes(&addr));
@@ -13,7 +13,7 @@ module merkle_airdrop::airdrop_tests {
         hash::sha3_256(bytes)
     }
 
-    /// Helper function to convert u64 to bytes (big-endian, same as contract)
+    // Helper function to convert u64 to bytes (big-endian, same as contract)
     fun u64_to_bytes_test(value: u64): vector<u8> {
         let bytes = vector::empty<u8>();
         let i = 0;
@@ -24,7 +24,7 @@ module merkle_airdrop::airdrop_tests {
         bytes
     }
 
-    /// Test initialization
+    // Test initialization
     #[test(admin = @merkle_airdrop)]
     fun test_initialization(admin: signer) {
         let root = vector::empty<u8>();
@@ -44,7 +44,7 @@ module merkle_airdrop::airdrop_tests {
         airdrop::init(&admin, root);
     }
 
-    /// Test compute_leaf function
+    // Test compute_leaf function
     #[test]
     fun test_compute_leaf() {
         let addr = @0x1234;
@@ -54,7 +54,7 @@ module merkle_airdrop::airdrop_tests {
         let expected_bytes = vector::empty<u8>();
         vector::append(&mut expected_bytes, bcs::to_bytes(&addr));
         vector::append(&mut expected_bytes, u64_to_bytes_test(amount));
-        let expected_hash = hash::sha3_256(expected_bytes);
+        // let expected_hash = hash::sha3_256(expected_bytes);
 
         // Test both produce same result
         let leaf1 = compute_leaf_test(addr, amount);
@@ -64,7 +64,7 @@ module merkle_airdrop::airdrop_tests {
         // This test verifies our understanding matches contract logic
     }
 
-    /// Test u64_to_bytes function
+    // Test u64_to_bytes function
     #[test]
     fun test_u64_to_bytes() {
         // Test with 0
@@ -91,8 +91,8 @@ module merkle_airdrop::airdrop_tests {
         assert!(*vector::borrow(&bytes, 7) == 0xEF, 111);
     }
 
-    /// Test verify_proof function with a simple 2-leaf tree
-    /// Test verify_proof function with a simple 2-leaf tree
+    // Test verify_proof function with a simple 2-leaf tree
+    // Test verify_proof function with a simple 2-leaf tree
     #[test]
     fun test_verify_proof_simple() {
         // Create a simple 2-leaf merkle tree
@@ -145,7 +145,7 @@ module merkle_airdrop::airdrop_tests {
         let j = 0;
         while (j < 1) {
         let sibling = *vector::borrow(&wrong_proof, j);
-        let is_left = true; // leaf2 is right, sibling should be left
+        // let is_left = true; // leaf2 is right, sibling should be left
 
         let combined_wrong = vector::empty<u8>();
         vector::append(&mut combined_wrong, sibling);
@@ -159,14 +159,11 @@ module merkle_airdrop::airdrop_tests {
         assert!(computed_wrong != root, 201);
     }
 
-    /// Test full airdrop flow with 4 users
-    #[test(admin = @merkle_airdrop, user1 = @0x1234, user2 = @0x1235, user3 = @0x1236, user4 = @0x1237)]
+    // Test full airdrop flow with 4 users
+    #[test(admin = @merkle_airdrop, user1 = @0x1234)]
     fun test_full_airdrop_flow(
         admin: signer,
         user1: signer,
-        user2: signer,
-        user3: signer,
-        user4: signer
     ) {
         // Create leaves
         let leaf1 = compute_leaf_test(@0x1234, 100);
@@ -219,12 +216,11 @@ module merkle_airdrop::airdrop_tests {
         vector::push_back(&mut positions_user1_copy, false);
     }
 
-    #[test(admin = @merkle_airdrop, user1 = @0x1234, user2 = @0x1235)]
+    #[test(admin = @merkle_airdrop, user1=@0x1234)]
     #[expected_failure(abort_code = airdrop::E_ALREADY_CLAIMED)]
     fun test_double_claim_prevention(
         admin: signer,
         user1: signer,
-        user2: signer
     ) {
         // Simple 2-leaf tree
         let leaf1 = compute_leaf_test(@0x1234, 100);
@@ -329,7 +325,7 @@ module merkle_airdrop::airdrop_tests {
         airdrop::cliam(&user1, 100, proof, positions);
     }
 
-    /// Test edge case: single leaf tree
+    // Test edge case: single leaf tree
     #[test(admin = @merkle_airdrop, user1 = @0x1234)]
     fun test_single_leaf_tree(
         admin: signer,
@@ -351,12 +347,10 @@ module merkle_airdrop::airdrop_tests {
         assert!(airdrop::is_claimed(@0x1234), 400);
     }
 
-    /// Test tree with odd number of leaves (duplicate last leaf)
-    #[test(admin = @merkle_airdrop, user1 = @0x1234, user2 = @0x1235, user3 = @0x1236)]
+    // Test tree with odd number of leaves (duplicate last leaf)
+    #[test(admin = @merkle_airdrop, user3=@0x1236)]
     fun test_three_leaf_tree(
         admin: signer,
-        user1: signer,
-        user2: signer,
         user3: signer
     ) {
         // 3 leaves: leaf3 will be duplicated
@@ -395,7 +389,7 @@ module merkle_airdrop::airdrop_tests {
         airdrop::cliam(&user3, 300, proof_user3, positions_user3);
     }
 
-    /// Test proof length mismatch
+    // Test proof length mismatch
     #[test(admin = @merkle_airdrop, user1 = @0x1234)]
     #[expected_failure(abort_code = airdrop::E_NOT_ELIGIBLE)]
     fun test_proof_length_mismatch(
@@ -425,7 +419,7 @@ module merkle_airdrop::airdrop_tests {
         airdrop::cliam(&user1, 100, proof, positions);
     }
 
-    /// Test that different addresses produce different leaves
+    // Test that different addresses produce different leaves
     #[test]
     fun test_address_uniqueness() {
         let leaf1 = compute_leaf_test(@0x1, 100);
@@ -434,7 +428,7 @@ module merkle_airdrop::airdrop_tests {
         assert!(leaf1 != leaf2, 500);
     }
 
-    /// Test that different amounts produce different leaves
+    // Test that different amounts produce different leaves
     #[test]
     fun test_amount_uniqueness() {
         let leaf1 = compute_leaf_test(@0x1, 100);
